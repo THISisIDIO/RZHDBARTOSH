@@ -18,6 +18,18 @@ def fill_locomotive_types():
     conn.commit()
     conn.close()     
 
+def create_tables():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''CREATE TABLE client
+            (
+            client_id INTEGER PRIMARY KEY NOT NULL,
+            username TEXT NOT NULL
+            password TEXT NOT NULL
+            email TEXT NOT NULL
+            );''')
+    conn.commit()
+    conn.close()  
+    
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
     cursor = conn.cursor()
