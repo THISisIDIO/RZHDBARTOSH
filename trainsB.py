@@ -22,6 +22,12 @@ def create_tables():
             gender_name TEXT NOT NULL
             );''')
     conn.commit()    
+    conn.execute('''CREATE TABLE IF NOT EXISTS carriage_types
+            (
+            carriage_type_id INTEGER PRIMARY KEY NOT NULL,
+            type_name TEXT NOT NULL
+            );''')
+    conn.commit()    
 
 def fill_locomotive_types():
     conn = sqlite3.connect('railwaysFB.db')
@@ -46,7 +52,15 @@ def fill_gender():
     conn.execute('''insert into gender(gender_name) values('murlock');''')
     conn.execute('''insert into gender(gender_name) values('watermelon');   ''')
     conn.commit()
-    conn.close()      
+    conn.close()   
+
+def fill_carriage_types():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into carriage_types(type_name) values('');''')
+    conn.execute('''insert into carriage_types(type_name) values('электровоз');''')
+    conn.execute('''insert into carriage_types(type_name) values('скоростной');    ''')
+    conn.commit()
+    conn.close()   
     
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
