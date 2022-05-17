@@ -51,7 +51,12 @@ def create_tables():
             route_id INTEGER PRIMARY KEY NOT NULL,
             route_name TEXT NOT NULL
             );''')
-    conn.commit()    
+    conn.commit()
+    conn.execute('''CREATE TABLE IF NOT EXISTS carriages
+            (
+            carriage_id INTEGER PRIMARY KEY NOT NULL,
+            carriage_type_id INTEGER NOT NULL
+            );''')    
 
 def fill_locomotive_types():
     conn = sqlite3.connect('railwaysFB.db')
@@ -128,7 +133,13 @@ def fill_routes():
     conn.commit()
     conn.close()  
 
-
+def fill_carriages():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);''')
+    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);''')
+    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);    ''')
+    conn.commit()
+    conn.close()  
 
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
