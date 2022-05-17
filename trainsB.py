@@ -70,9 +70,9 @@ def fill_carriage_types():
     
 def fill_client_document_types():
     conn = sqlite3.connect('railwaysFB.db')
-    conn.execute('''insert into client_document_types(type_name) values('паровоз');''')
-    conn.execute('''insert into locomotive_types(type_name) values('электровоз');''')
-    conn.execute('''insert into locomotive_types(type_name) values('скоростной');    ''')
+    conn.execute('''insert into client_document_types(type_name) values('паспорт');''')
+    conn.execute('''insert into client_document_types(type_name) values('свидетельство о рождении');''')
+    conn.execute('''insert into client_document_types(type_name) values('загран паспорт');    ''')
     conn.commit()
     conn.close()  
     
@@ -92,6 +92,7 @@ def db_init():
     fill_client()
     fill_gender()
     fill_carriage_types()
+    fill_client_document_types()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -135,5 +136,16 @@ cursor.execute('''
 SELECT * FROM carriage_types;''')
 res = cursor.fetchall()
 for r in res:
-    print(r)    
+    print(r) 
+    
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM  client_document_types;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)
     
