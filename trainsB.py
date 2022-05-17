@@ -135,9 +135,9 @@ def fill_routes():
 
 def fill_carriages():
     conn = sqlite3.connect('railwaysFB.db')
-    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);''')
-    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);''')
-    conn.execute('''insert into carriages(carriage_type_id) values(SELECT geo_entities.geo_entity_id FROM geo_entitie);    ''')
+    conn.execute('''insert into carriages(carriage_type_id) values(1);''')
+    conn.execute('''insert into carriages(carriage_type_id) values(2);''')
+    conn.execute('''insert into carriages(carriage_type_id) values(3);    ''')
     conn.commit()
     conn.close()  
 
@@ -161,6 +161,7 @@ def db_init():
     fill_trains()
     fill_geo_entities()
     fill_routes()
+    fill_carriages()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -250,3 +251,14 @@ SELECT * FROM routes;''')
 res = cursor.fetchall()
 for r in res:
     print(r)
+    
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT carriage_types.carriage_type_id FROM carriage_types;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)    
