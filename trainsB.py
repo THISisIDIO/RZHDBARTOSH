@@ -18,7 +18,7 @@ def create_tables():
     conn.commit()
     conn.execute('''CREATE TABLE IF NOT EXISTS gender
             (
-            gender_id INTEGER PRIMARY KEY NOT NULL,
+            gender_id INTEGER PRIMARY KEY NOT NULL ,
             gender_name TEXT NOT NULL
             );''')
     conn.commit()    
