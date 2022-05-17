@@ -95,7 +95,25 @@ def fill_trains():
     conn.execute('''insert into trains(train_name) values('O.L.E.G.');    ''')
     conn.commit()
     conn.close()   
-    
+
+def fill_geo_entities():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Россия');''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Москва');''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Московская область');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Красногорск');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Химки');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Видное');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('ЗАО Москвы');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('ЦАО Москвы');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('ЮАО Москвы');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Беларусь');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Минск');    ''')
+    conn.execute('''insert into geo_entities(geo_entity_name) values('Минская область');    ''')
+    conn.commit()
+    conn.close() 
+
+
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
     cursor = conn.cursor()
@@ -114,6 +132,7 @@ def db_init():
     fill_carriage_types()
     fill_client_document_types()
     fill_trains()
+    fill_geo_entities()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -129,6 +148,7 @@ for r in res:
 from os.path import exists
 if not exists('railwaysFB.db'):
     db_init()
+
 conn = sqlite3.connect('railwaysFB.db')
 cursor = conn.cursor()
 cursor.execute('''
@@ -180,3 +200,15 @@ SELECT * FROM trains;''')
 res = cursor.fetchall()
 for r in res:
     print(r)
+
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM geo_entities;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)
+
