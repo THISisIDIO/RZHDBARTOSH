@@ -27,6 +27,12 @@ def create_tables():
             carriage_type_id INTEGER PRIMARY KEY NOT NULL,
             type_name TEXT NOT NULL
             );''')
+    conn.commit()   
+    conn.execute('''CREATE TABLE IF NOT EXISTS client_document_types
+            (
+            client_document_type_id INTEGER PRIMARY KEY NOT NULL,
+            type_name TEXT NOT NULL
+            );''')
     conn.commit()    
 
 def fill_locomotive_types():
@@ -60,7 +66,15 @@ def fill_carriage_types():
     conn.execute('''insert into carriage_types(type_name) values('грузовой');''')
     conn.execute('''insert into carriage_types(type_name) values('ресторан');    ''')
     conn.commit()
-    conn.close()   
+    conn.close()  
+    
+def fill_client_document_types():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into client_document_types(type_name) values('паровоз');''')
+    conn.execute('''insert into locomotive_types(type_name) values('электровоз');''')
+    conn.execute('''insert into locomotive_types(type_name) values('скоростной');    ''')
+    conn.commit()
+    conn.close()  
     
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
