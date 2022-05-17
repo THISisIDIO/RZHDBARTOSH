@@ -120,11 +120,11 @@ def fill_geo_entities():
     conn.close()
     
     
-def fill_():
+def fill_routes():
     conn = sqlite3.connect('railwaysFB.db')
-    conn.execute('''insert into locomotive_types(type_name) values('паровоз');''')
-    conn.execute('''insert into locomotive_types(type_name) values('электровоз');''')
-    conn.execute('''insert into locomotive_types(type_name) values('скоростной');    ''')
+    conn.execute('''insert into routes(route_name) values('Москва Химки');''')
+    conn.execute('''insert into routes(route_name) values('Москва Минск');''')
+    conn.execute('''insert into routes(route_name) values('Моска Красногорск');    ''')
     conn.commit()
     conn.close()  
 
@@ -149,6 +149,7 @@ def db_init():
     fill_client_document_types()
     fill_trains()
     fill_geo_entities()
+    fill_routes()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -228,3 +229,13 @@ res = cursor.fetchall()
 for r in res:
     print(r)
 
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM routes;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)
