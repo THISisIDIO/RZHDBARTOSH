@@ -56,9 +56,9 @@ def fill_gender():
 
 def fill_carriage_types():
     conn = sqlite3.connect('railwaysFB.db')
-    conn.execute('''insert into carriage_types(type_name) values('');''')
-    conn.execute('''insert into carriage_types(type_name) values('электровоз');''')
-    conn.execute('''insert into carriage_types(type_name) values('скоростной');    ''')
+    conn.execute('''insert into carriage_types(type_name) values('люкс');''')
+    conn.execute('''insert into carriage_types(type_name) values('грузовой');''')
+    conn.execute('''insert into carriage_types(type_name) values('ресторан');    ''')
     conn.commit()
     conn.close()   
     
@@ -77,6 +77,7 @@ def db_init():
     fill_locomotive_types()
     fill_client()
     fill_gender()
+    fill_carriage_types()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -110,3 +111,15 @@ SELECT * FROM gender;''')
 res = cursor.fetchall()
 for r in res:
     print(r)
+    
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM carriage_types;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)    
+    
