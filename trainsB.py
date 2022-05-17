@@ -39,6 +39,14 @@ def fill_client():
     conn.execute('''insert into client(username,password,email) values('Peter','gjkrt845','Lizborn.@mail.ru');    ''')  
     conn.commit()
     conn.close() 
+
+def fill_gender():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into gender(gender_name) values('attack helicopter');''')
+    conn.execute('''insert into gender(gender_name) values('murlock');''')
+    conn.execute('''insert into gender(gender_name) values('watermelon');   ''')
+    conn.commit()
+    conn.close()      
     
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
@@ -54,6 +62,7 @@ def db_init():
     check_tables()
     fill_locomotive_types()
     fill_client()
+    fill_gender()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -73,6 +82,17 @@ conn = sqlite3.connect('railwaysFB.db')
 cursor = conn.cursor()
 cursor.execute('''
 SELECT * FROM locomotive_types;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)
+    
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM gender;''')
 res = cursor.fetchall()
 for r in res:
     print(r)
