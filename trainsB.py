@@ -45,6 +45,12 @@ def create_tables():
             geo_entity_id INTEGER PRIMARY KEY NOT NULL,
             geo_entity_name TEXT NOT NULL
             );''')
+    conn.commit()
+    conn.execute('''CREATE TABLE IF NOT EXISTS routes
+            (
+            route_id INTEGER PRIMARY KEY NOT NULL,
+            route_name TEXT NOT NULL
+            );''')
     conn.commit()    
 
 def fill_locomotive_types():
@@ -111,7 +117,17 @@ def fill_geo_entities():
     conn.execute('''insert into geo_entities(geo_entity_name) values('Минск');    ''')
     conn.execute('''insert into geo_entities(geo_entity_name) values('Минская область');    ''')
     conn.commit()
-    conn.close() 
+    conn.close()
+    
+    
+def fill_():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into locomotive_types(type_name) values('паровоз');''')
+    conn.execute('''insert into locomotive_types(type_name) values('электровоз');''')
+    conn.execute('''insert into locomotive_types(type_name) values('скоростной');    ''')
+    conn.commit()
+    conn.close()  
+
 
 
 def check_tables():
