@@ -33,7 +33,13 @@ def create_tables():
             client_document_type_id INTEGER PRIMARY KEY NOT NULL,
             type_name TEXT NOT NULL
             );''')
-    conn.commit()    
+    conn.commit()  
+    conn.execute('''CREATE TABLE IF NOT EXISTS trains
+            (
+            train_id INTEGER PRIMARY KEY NOT NULL,
+            train_name TEXT NOT NULL
+            );''')
+    conn.commit()        
 
 def fill_locomotive_types():
     conn = sqlite3.connect('railwaysFB.db')
