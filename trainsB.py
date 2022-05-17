@@ -82,6 +82,14 @@ def fill_client_document_types():
     conn.commit()
     conn.close()  
     
+def fill_trains():
+    conn = sqlite3.connect('railwaysFB.db')
+    conn.execute('''insert into trains(train_name) values('THOMAS');''')
+    conn.execute('''insert into trains(train_name) values('PROXIMA');''')
+    conn.execute('''insert into trains(train_name) values('O.L.E.G.');    ''')
+    conn.commit()
+    conn.close()   
+    
 def check_tables():
     conn = sqlite3.connect('railwaysFB.db')
     cursor = conn.cursor()
@@ -99,6 +107,7 @@ def db_init():
     fill_gender()
     fill_carriage_types()
     fill_client_document_types()
+    fill_trains()
 
 from os.path import exists
 if not exists('railwaysFB.db'):
@@ -155,3 +164,13 @@ res = cursor.fetchall()
 for r in res:
     print(r)
     
+from os.path import exists
+if not exists('railwaysFB.db'):
+    db_init()
+conn = sqlite3.connect('railwaysFB.db')
+cursor = conn.cursor()
+cursor.execute('''
+SELECT * FROM trains;''')
+res = cursor.fetchall()
+for r in res:
+    print(r)
