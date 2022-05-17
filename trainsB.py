@@ -258,7 +258,7 @@ if not exists('railwaysFB.db'):
 conn = sqlite3.connect('railwaysFB.db')
 cursor = conn.cursor()
 cursor.execute('''
-SELECT carriage_types.carriage_type_id FROM carriage_types;''')
+SELECT * FROM carriages;''')
 res = cursor.fetchall()
 for r in res:
     print(r)    
